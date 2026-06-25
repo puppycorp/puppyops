@@ -1,0 +1,11 @@
+<VStack spacing=7>
+  <For each={items} itemAs="item" key={item.label}>
+    <HStack spacing=8>
+      <Text value={item.label} color="#aeb8c4" grow=1 />
+      <Text value={item.value} color={item.accent} />
+      <If test={item.detail != ""}>
+        <Text value={item.detail} color="#7f8b9b" />
+      </If>
+    </HStack>
+  </For>
+</VStack>

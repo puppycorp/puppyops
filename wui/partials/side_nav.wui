@@ -1,0 +1,10 @@
+<VStack width=150 minWidth=150 spacing=7 padding=10 backgroundColor="#07101a" border="1px solid #162438">
+  <For each={items} itemAs="item" key={item.label}>
+    <VStack height=54 spacing=4 paddingLeft=14 paddingRight=10 backgroundColor={item.active ? "#10243c" : "#07101a"} border={item.active ? "1px solid #1f75d6" : "1px solid #07101a"}>
+      <Link href={item.href} text={item.label} />
+    </VStack>
+  </For>
+  <Text value="" grow=1 />
+  <Link href="/config" text="Settings" />
+  <Text value="Help" color="#dce7f3" />
+</VStack>

@@ -1,0 +1,9 @@
+<VStack spacing=8 padding=12 backgroundColor="#0d1724" border="1px solid #1c2b40">
+  <HStack>
+    <Text value={title} color="#f4f8ff" grow=1 />
+    <If test={(status ?? "") != ""}>
+      <Text value={status} color={statusColor ?? "#36d67a"} />
+    </If>
+  </HStack>
+  <Children />
+</VStack>

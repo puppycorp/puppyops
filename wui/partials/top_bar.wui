@@ -1,0 +1,34 @@
+<HStack height=56 spacing=16 paddingLeft=18 paddingRight=18 backgroundColor="#070d14" border="1px solid #152033">
+  <HStack width=150 spacing=9>
+    <VStack width=28 height=28 backgroundColor="#0b6f5a" border="1px solid #36d67a">
+      <Text value="P" color="#eafff3" grow=1 textAlign="center" />
+    </VStack>
+    <Text value="PuppyOps" color="#f4f8ff" />
+  </HStack>
+  <HStack width=1 height=34 backgroundColor="#26364d" />
+  <HStack grow=1 minWidth=0 spacing=8>
+    <For each={shell.breadcrumbs} itemAs="crumb" key={crumb.label}>
+      <HStack spacing=8>
+        <Text value={crumb.label} color={crumb.active ? "#f4f8ff" : "#c2cedd"} />
+        <If test={crumb.has_badge}>
+          <HStack height=22 paddingLeft=7 paddingRight=7 backgroundColor="#0d3524" border="1px solid #1d8b52">
+            <Text value={crumb.badge} color="#57f18b" />
+          </HStack>
+        </If>
+        <If test={crumb.has_separator}>
+          <Text value={crumb.separator} color="#6f7f91" />
+        </If>
+      </HStack>
+    </For>
+  </HStack>
+  <Text value="Connected" color="#51e66a" />
+  <HStack width=1 height=28 backgroundColor="#26364d" />
+  <Text value="Wi-Fi  32 ms" color="#dce7f3" />
+  <HStack width=1 height=28 backgroundColor="#26364d" />
+  <Text value="Battery  78%" color="#dce7f3" />
+  <HStack width=1 height=28 backgroundColor="#26364d" />
+  <Text value="REC 00:12:48" color="#ff6a5d" />
+  <HStack width=1 height=28 backgroundColor="#26364d" />
+  <Text value="A. Engineer" color="#f4f8ff" />
+  <Text value="v" color="#9fb0c5" />
+</HStack>

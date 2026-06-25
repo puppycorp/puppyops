@@ -1,0 +1,110 @@
+<Import name="AppShell" from="partials/app_shell" />
+<Import name="PanelCard" from="partials/panel_card" />
+<Import name="StatusList" from="partials/status_list" />
+<Import name="LogList" from="partials/log_list" />
+<AppShell shell={state.shell}>
+  <HStack grow=1 minHeight=0 spacing=8>
+    <VStack width=260 minWidth=220 maxWidth=360 hresize=true minHeight=0 spacing=8>
+      <PanelCard title="ROBOT PREVIEW" status="">
+        <CustomComponent name="robot-preview" entry={state.panel_entry} props={state.robot_preview_props} height=238 />
+      </PanelCard>
+      <PanelCard title="ROBOT STATUS" status="Healthy" statusColor="#56e364">
+        <StatusList items={state.robot_status} />
+        <Text value="JOINT STATUS" color="#f4f8ff" />
+        <HStack spacing=6>
+          <For each={state.joint_status} itemAs="joint" key={joint.label}>
+            <VStack grow=1 height=42 spacing=3 border="1px solid #23364f" backgroundColor="#0b1420">
+              <Text value={joint.label} color="#dce7f3" textAlign="center" />
+              <Text value={joint.value} color="#56e364" textAlign="center" />
+            </VStack>
+          </For>
+        </HStack>
+      </PanelCard>
+    </VStack>
+
+    <VStack grow=1 minWidth=520 minHeight=0 spacing=8>
+      <PanelCard title="LIVE VIEW - FRONT CAMERA" status="">
+        <CustomComponent name="live-view" entry={state.panel_entry} props={state.live_view_props} height=610 />
+      </PanelCard>
+      <HStack height=206 minHeight=160 spacing=8>
+        <PanelCard title="SENSOR VIEWS" status="">
+          <HStack grow=1 minHeight=0 spacing=6>
+            <For each={state.sensor_views} itemAs="sensor" key={sensor.name}>
+              <VStack grow=1 minWidth=94 spacing=0 backgroundColor="#0b1420" border="1px solid #23364f">
+                <HStack height=22 paddingLeft=6 paddingRight=4>
+                  <Text value={sensor.name} color="#dce7f3" grow=1 />
+                  <Text value="..." color="#7f8b9b" />
+                </HStack>
+                <CustomComponent name={sensor.component_name} entry={state.panel_entry} props={sensor.props} grow=1 />
+              </VStack>
+            </For>
+          </HStack>
+        </PanelCard>
+        <PanelCard title="LOGS" status="">
+          <LogList logs={state.logs} />
+        </PanelCard>
+        <PanelCard title="TIMELINE - ep_2025-05-12_0013" status="12:48">
+          <CustomComponent name="timeline" entry={state.panel_entry} props={state.timeline_props} height=150 />
+        </PanelCard>
+      </HStack>
+    </VStack>
+
+    <VStack width=300 minWidth=260 maxWidth=380 hresize=true minHeight=0 spacing=8>
+      <PanelCard title="TELEOP CONTROLS" status="">
+        <Text value="LOCOMOTION" color="#aeb8c4" />
+        <HStack spacing=6>
+          <Button text="Walk" backgroundColor="#156ed3" border="1px solid #2a8dff" color="#f4f8ff" height=26 />
+          <Button text="Run" backgroundColor="#111c2b" border="1px solid #26364d" color="#8a96a8" height=26 />
+          <Button text="Step" backgroundColor="#111c2b" border="1px solid #26364d" color="#8a96a8" height=26 />
+        </HStack>
+        <HStack height=128 spacing=14>
+          <VStack width=128 height=128 backgroundColor="#0a121d" border="1px solid #26364d">
+            <Text value="^" color="#b4c9df" textAlign="center" />
+            <Text value="< O >" color="#b4c9df" grow=1 textAlign="center" />
+            <Text value="v" color="#b4c9df" textAlign="center" />
+          </VStack>
+          <VStack grow=1 spacing=6>
+            <Text value="Speed Scale" color="#aeb8c4" />
+            <Text value="0.75x" color="#f4f8ff" />
+            <Slider min=0 max=100 value=45 step=1 />
+            <Text value="2.0x" color="#7f8b9b" />
+            <Text value="1.0x" color="#7f8b9b" />
+          </VStack>
+        </HStack>
+        <Text value="ARM CONTROL" color="#aeb8c4" />
+        <CustomComponent name="arm-control" entry={state.panel_entry} props={state.arm_props} height=116 />
+        <Text value="HAND CONTROL" color="#aeb8c4" />
+        <CustomComponent name="hand-control" entry={state.panel_entry} props={state.hand_props} height=96 />
+        <HStack><Text value="Gripper" color="#dce7f3" grow=1 /><Text value="65%" color="#f4f8ff" /></HStack>
+        <Slider min=0 max=100 value=65 step=1 />
+        <HStack><Text value="Fingers" color="#dce7f3" grow=1 /><Text value="72%" color="#f4f8ff" /></HStack>
+        <Slider min=0 max=100 value=72 step=1 />
+        <HStack spacing=6>
+          <Button text="Autonomy Assist" backgroundColor="#0d56a4" border="1px solid #2a8dff" color="#f4f8ff" height=30 />
+          <Button text="EMERGENCY STOP" backgroundColor="#bd2c2c" border="1px solid #fa5b5b" color="#fff4f4" height=30 />
+        </HStack>
+      </PanelCard>
+    </VStack>
+
+    <VStack width=314 minWidth=280 maxWidth=430 hresize=true minHeight=0 spacing=8>
+      <PanelCard title="MAP & LOCALIZATION" status="">
+        <CustomComponent name="map" entry={state.panel_entry} props={state.map_props} height=250 />
+      </PanelCard>
+      <PanelCard title="DATA COLLECTION" status="">
+        <HStack><Text value="Episode ID" color="#94a3b6" grow=1 /><Text value="ep_2025-05-12_0013" color="#dce7f3" /></HStack>
+        <HStack spacing=8>
+          <Button text="Start Recording" backgroundColor="#c5413f" border="1px solid #ff6764" color="#fff4f4" height=32 />
+          <Button text="Capture Episode" backgroundColor="#162334" border="1px solid #2a3b55" color="#dce7f3" height=32 />
+        </HStack>
+        <Text value="Sensors" color="#aeb8c4" />
+        <StatusList items={state.sensors} />
+        <Text value="QUICK ACTIONS" color="#f4f8ff" />
+        <HStack spacing=8 wrap=true>
+          <For each={state.actions} itemAs="action" key={action.label}>
+            <Button text={action.label} backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=32 />
+          </For>
+        </HStack>
+      </PanelCard>
+    </VStack>
+  </HStack>
+</AppShell>

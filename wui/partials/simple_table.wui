@@ -1,0 +1,16 @@
+<VStack spacing=0 border="1px solid #1c2b40">
+  <HStack height=28 paddingLeft=10 paddingRight=10 backgroundColor="#0a121d">
+    <Text value={h1 ?? "Name"} color="#8ea1b7" grow=1 />
+    <Text value={h2 ?? "Status"} color="#8ea1b7" minWidth=110 />
+    <Text value={h3 ?? "Robot"} color="#8ea1b7" minWidth=110 />
+    <Text value={h4 ?? "Value"} color="#8ea1b7" minWidth=90 textAlign="right" />
+  </HStack>
+  <For each={rows} itemAs="row" key={row.name}>
+    <HStack height=38 spacing=8 paddingLeft=10 paddingRight=10 backgroundColor="#0d1724" border="1px solid #162438">
+      <Text value={row.name} color={row.accent} grow=1 />
+      <Text value={row.col1} color="#dce7f3" minWidth=110 />
+      <Text value={row.col2} color="#aeb8c4" minWidth=110 />
+      <Text value={row.col3} color="#dce7f3" minWidth=90 textAlign="right" />
+    </HStack>
+  </For>
+</VStack>

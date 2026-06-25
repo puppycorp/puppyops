@@ -1,0 +1,53 @@
+<Import name="AppShell" from="partials/app_shell" />
+<Import name="PanelCard" from="partials/panel_card" />
+<Import name="StatusList" from="partials/status_list" />
+<Import name="LogList" from="partials/log_list" />
+<Import name="SimpleTable" from="partials/simple_table" />
+<AppShell shell={state.shell}>
+  <HStack grow=1 minHeight=0 spacing=10>
+    <VStack width=285 minHeight=0 spacing=10>
+      <PanelCard title="Replay Browser" status="">
+        <TextInput value="" placeholder="Search runs..." fill=true backgroundColor="#0a121d" border="1px solid #26364d" color="#dce7f3" height=30 />
+        <SimpleTable rows={state.runs} h1="Run" h2="Started" h3="Duration" h4="Source" />
+      </PanelCard>
+    </VStack>
+    <VStack grow=1 minWidth=620 minHeight=0 spacing=10>
+      <HStack height=44 spacing=10>
+        <VStack grow=1 spacing=4>
+          <HStack spacing=8><Text value="run_2025-05-16_0013" color="#f4f8ff" /><Text value="REAL" color="#57f18b" /></HStack>
+          <Text value="May 16, 2025 10:15:34 AM    14m 26s    Atlas Warehouse Aisle 7" color="#9fb0c5" />
+        </VStack>
+        <Button text="Export Clip" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=32 />
+        <Button text="Annotate" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=32 />
+        <Button text="Open in Simulator" backgroundColor="#299b55" border="1px solid #57f18b" color="#effff4" height=32 />
+      </HStack>
+      <PanelCard title="" status="">
+        <CustomComponent name="replay-video" entry={state.panel_entry} props={state.video_props} height=398 />
+      </PanelCard>
+      <PanelCard title="Timeline" status="">
+        <CustomComponent name="replay-timeline" entry={state.panel_entry} props={state.timeline_props} height=210 />
+      </PanelCard>
+    </VStack>
+    <VStack width=610 minWidth=520 minHeight=0 spacing=10>
+      <HStack height=420 spacing=10>
+        <PanelCard title="Map & Localization" status="">
+          <CustomComponent name="replay-map" entry={state.panel_entry} props={state.map_props} height=310 />
+          <HStack><Text value="Localization Quality" color="#aeb8c4" grow=1 /><Text value="GOOD (92%)" color="#36d67a" /></HStack>
+          <Slider min=0 max=100 value=92 step=1 />
+        </PanelCard>
+        <PanelCard title="Episode Details" status="">
+          <StatusList items={state.details} />
+          <Button text="View Run Summary" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=34 />
+        </PanelCard>
+      </HStack>
+      <HStack grow=1 minHeight=0 spacing=10>
+        <PanelCard title="Telemetry" status="">
+          <CustomComponent name="telemetry" entry={state.panel_entry} props={state.timeline_props} height=270 />
+        </PanelCard>
+        <PanelCard title="Event Log" status="">
+          <LogList logs={state.events} />
+        </PanelCard>
+      </HStack>
+    </VStack>
+  </HStack>
+</AppShell>

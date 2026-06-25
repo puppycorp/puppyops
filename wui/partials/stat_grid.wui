@@ -1,0 +1,9 @@
+<HStack spacing=10 wrap=true>
+  <For each={stats} itemAs="stat" key={stat.label}>
+    <VStack width={width ?? 190} height={height ?? 88} spacing=4 padding=12 backgroundColor="#0f1b29" border="1px solid #223149">
+      <Text value={stat.label} color="#aeb8c4" />
+      <Text value={stat.value} color="#f4f8ff" />
+      <Text value={stat.detail} color={stat.accent} breakWords=true />
+    </VStack>
+  </For>
+</HStack>

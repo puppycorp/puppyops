@@ -1,0 +1,9 @@
+<VStack spacing=5 overflow="auto">
+  <For each={logs} itemAs="log" key={log.time}>
+    <HStack spacing=8>
+      <Text value={log.time} color="#7f8b9b" minWidth=78 />
+      <Text value={log.level} color={log.color} minWidth=42 />
+      <Text value={log.message} color="#dce7f3" grow=1 breakWords=true />
+    </HStack>
+  </For>
+</VStack>

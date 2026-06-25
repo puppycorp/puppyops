@@ -1,0 +1,72 @@
+<Import name="AppShell" from="partials/app_shell" />
+<Import name="PanelCard" from="partials/panel_card" />
+<Import name="StatusList" from="partials/status_list" />
+<Import name="StatGrid" from="partials/stat_grid" />
+<Import name="SimpleTable" from="partials/simple_table" />
+<AppShell shell={state.shell}>
+  <HStack height=72 spacing=12>
+    <VStack grow=1 spacing=4>
+      <HStack spacing=8><Text value="atlas_warehouse_v1.2" color="#f4f8ff" /><Text value="REAL" color="#57f18b" /></HStack>
+      <Text value="Last Modified: May 16, 2025 11:01 AM    Created: May 15, 2025 10:15 AM    by A. Engineer" color="#9fb0c5" />
+    </VStack>
+    <Button text="Start Capture" backgroundColor="#36d67a" border="1px solid #57f18b" color="#05100a" height=38 />
+    <Button text="Export" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=38 />
+    <Button text="Merge" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=38 />
+    <Button text="New Version" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=38 />
+  </HStack>
+  <StatGrid stats={state.stats} width=195 height=86 />
+  <HStack grow=1 minHeight=0 spacing=10>
+    <VStack grow=1 minWidth=520 spacing=10>
+      <PanelCard title="Datasets" status="">
+        <HStack spacing=8>
+          <TextInput value="" placeholder="Search datasets..." fill=true backgroundColor="#0a121d" border="1px solid #26364d" color="#dce7f3" height=30 />
+          <Button text="All Types" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=30 />
+          <Button text="Filters" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=30 />
+        </HStack>
+        <SimpleTable rows={state.rows} h1="Name" h2="Type" h3="Samples" h4="Quality" />
+      </PanelCard>
+      <HStack height=230 spacing=10>
+        <PanelCard title="Growth Over Time" status="">
+          <CustomComponent name="growth" entry={state.panel_entry} props={state.preview_props} height=160 />
+        </PanelCard>
+        <PanelCard title="Class Balance" status="">
+          <StatusList items={state.tags} />
+        </PanelCard>
+        <PanelCard title="Labels & Tags" status="">
+          <HStack spacing=6 wrap=true>
+            <For each={state.tags} itemAs="tag" key={tag.label}>
+              <Button text={tag.label} backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=24 />
+            </For>
+          </HStack>
+        </PanelCard>
+      </HStack>
+    </VStack>
+    <VStack width=770 minWidth=620 spacing=10>
+      <PanelCard title="Sample Preview (atlas_warehouse_v1.2)" status="">
+        <HStack height=150 spacing=8>
+          <CustomComponent name="rgb-front" entry={state.panel_entry} props={state.preview_props} grow=1 />
+          <CustomComponent name="depth-front" entry={state.panel_entry} props={state.depth_props} grow=1 />
+          <CustomComponent name="lidar-top" entry={state.panel_entry} props={state.lidar_props} grow=1 />
+          <CustomComponent name="hand-camera" entry={state.panel_entry} props={state.hand_props} grow=1 />
+        </HStack>
+      </PanelCard>
+      <HStack height=260 spacing=10>
+        <PanelCard title="Metadata" status="">
+          <StatusList items={state.metadata} />
+        </PanelCard>
+        <PanelCard title="Split Summary" status="">
+          <CustomComponent name="split-donut" entry={state.panel_entry} props={state.lidar_props} height=150 />
+          <StatusList items={state.split} />
+        </PanelCard>
+      </HStack>
+      <HStack height=230 spacing=10>
+        <PanelCard title="Storage & Sync" status="">
+          <StatusList items={state.metadata} />
+        </PanelCard>
+        <PanelCard title="Data Quality Breakdown" status="">
+          <CustomComponent name="quality-radar" entry={state.panel_entry} props={state.lidar_props} height=160 />
+        </PanelCard>
+      </HStack>
+    </VStack>
+  </HStack>
+</AppShell>

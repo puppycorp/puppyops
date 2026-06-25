@@ -1,0 +1,65 @@
+<Import name="AppShell" from="partials/app_shell" />
+<Import name="PanelCard" from="partials/panel_card" />
+<Import name="StatusList" from="partials/status_list" />
+<Import name="LogList" from="partials/log_list" />
+<AppShell shell={state.shell}>
+  <HStack grow=1 minHeight=0 spacing=10>
+    <VStack grow=1 minWidth=720 minHeight=0 spacing=10>
+      <PanelCard title="Robots" status="7 robots in fleet">
+        <HStack spacing=8>
+          <TextInput value="" placeholder="Search robots..." fill=true backgroundColor="#0a121d" border="1px solid #26364d" color="#dce7f3" height=30 />
+          <Button text="All Status" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=30 />
+          <Button text="Add Robot" backgroundColor="#36d67a" border="1px solid #57f18b" color="#05100a" height=32 />
+        </HStack>
+        <HStack spacing=10 wrap=true>
+          <For each={state.robots} itemAs="robot" key={robot.name}>
+            <VStack width=280 height=150 spacing=5 padding=10 backgroundColor="#0f1b29" border={robot.name == "PuppyBot-X1" ? "1px solid #4d9dff" : "1px solid #223149"}>
+              <HStack>
+                <Text value={robot.name} color="#f4f8ff" grow=1 />
+                <Text value={robot.badge} color={robot.accent} />
+              </HStack>
+              <HStack><Text value="Battery" color="#aeb8c4" grow=1 /><Text value={robot.col3} color="#dce7f3" /></HStack>
+              <HStack><Text value="Location" color="#aeb8c4" grow=1 /><Text value={robot.col1} color="#dce7f3" /></HStack>
+              <Text value={robot.col2} color="#9fb0c5" breakWords=true />
+            </VStack>
+          </For>
+        </HStack>
+      </PanelCard>
+      <PanelCard title="Fleet Deployment Map" status="Live">
+        <CustomComponent name="fleet-map" entry={state.panel_entry} props={state.map_props} height=260 />
+      </PanelCard>
+    </VStack>
+    <VStack width=620 minWidth=520 minHeight=0 spacing=10>
+      <PanelCard title="PuppyBot-X1" status="ACTIVE">
+        <HStack spacing=18>
+          <CustomComponent name="robot-detail" entry={state.panel_entry} props={state.robot_props} width=230 height=320 />
+          <VStack grow=1 spacing=8>
+            <Text value="Configuration" color="#f4f8ff" />
+            <StatusList items={state.config} />
+            <Text value="Current Mission" color="#f4f8ff" />
+            <Text value="Pallet Pickup A -> B" color="#f4f8ff" />
+            <Slider min=0 max=100 value=62 step=1 />
+          </VStack>
+        </HStack>
+      </PanelCard>
+      <HStack height=210 spacing=10>
+        <PanelCard title="Health" status="">
+          <StatusList items={state.health} />
+        </PanelCard>
+        <PanelCard title="Connectivity" status="">
+          <StatusList items={state.config} />
+        </PanelCard>
+        <PanelCard title="Quick Actions" status="">
+          <HStack spacing=8 wrap=true>
+            <Button text="Start Teleop" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=40 />
+            <Button text="Pause Mission" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=40 />
+            <Button text="Reboot Robot" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=40 />
+          </HStack>
+        </PanelCard>
+      </HStack>
+      <PanelCard title="Recent Events" status="View All Events">
+        <LogList logs={state.events} />
+      </PanelCard>
+    </VStack>
+  </HStack>
+</AppShell>

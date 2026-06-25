@@ -1,0 +1,75 @@
+<Import name="AppShell" from="partials/app_shell" />
+<Import name="PanelCard" from="partials/panel_card" />
+<Import name="StatusList" from="partials/status_list" />
+<Import name="SimpleTable" from="partials/simple_table" />
+<AppShell shell={state.shell}>
+  <HStack grow=1 minHeight=0 spacing=10>
+    <VStack grow=1 minWidth=760 minHeight=0 spacing=10>
+      <Text value="Configuration" color="#f4f8ff" />
+      <HStack height=38 spacing=6 backgroundColor="#0d1724" border="1px solid #1c2b40">
+        <For each={state.tabs} itemAs="tab" key={tab.label}>
+          <VStack width=120 border={tab.label == "Robot Profile" ? "1px solid #1f75d6" : "1px solid #0d1724"}>
+            <Text value={tab.label} color="#dce7f3" grow=1 textAlign="center" />
+          </VStack>
+        </For>
+      </HStack>
+      <HStack grow=1 minHeight=0 spacing=10 wrap=true>
+        <PanelCard title="1. ROBOT PROFILE" status="">
+          <StatusList items={state.profile} />
+        </PanelCard>
+        <PanelCard title="2. CONTROLS" status="">
+          <StatusList items={state.controls} />
+        </PanelCard>
+        <PanelCard title="3. AUTONOMY ASSIST DEFAULTS" status="">
+          <StatusList items={state.controls} />
+        </PanelCard>
+        <PanelCard title="4. SAFETY LIMITS" status="">
+          <StatusList items={state.safety} />
+        </PanelCard>
+        <PanelCard title="5. CAMERAS" status="">
+          <StatusList items={state.sensors} />
+        </PanelCard>
+        <PanelCard title="6. SENSORS" status="">
+          <StatusList items={state.sensors} />
+        </PanelCard>
+        <PanelCard title="7. DATA COLLECTION DEFAULTS" status="">
+          <StatusList items={state.profile} />
+        </PanelCard>
+        <PanelCard title="8. NETWORK" status="">
+          <StatusList items={state.controls} />
+        </PanelCard>
+        <PanelCard title="9. OPERATORS & PERMISSIONS" status="">
+          <StatusList items={state.profile} />
+        </PanelCard>
+        <PanelCard title="10. INTEGRATIONS" status="">
+          <StatusList items={state.controls} />
+        </PanelCard>
+        <PanelCard title="11. SYSTEM" status="">
+          <StatusList items={state.safety} />
+        </PanelCard>
+        <PanelCard title="CONFIG HISTORY" status="View All">
+          <SimpleTable rows={state.history} h1="Version" h2="User" h3="Time" h4="Status" />
+        </PanelCard>
+      </HStack>
+    </VStack>
+    <VStack width=360 minHeight=0 spacing=10>
+      <PanelCard title="CONFIG SUMMARY" status="All settings valid">
+        <StatusList items={state.profile} />
+      </PanelCard>
+      <PanelCard title="CURRENT ROBOT" status="ACTIVE">
+        <CustomComponent name="config-robot" entry={state.panel_entry} props={state.robot_props} height=270 />
+      </PanelCard>
+      <PanelCard title="CALIBRATION STATUS" status="">
+        <StatusList items={state.sensors} />
+      </PanelCard>
+      <HStack height=54 spacing=8>
+        <Button text="Save Changes" backgroundColor="#36d67a" border="1px solid #57f18b" color="#05100a" height=46 />
+        <Button text="Discard Changes" backgroundColor="#b92833" border="1px solid #ff6a5d" color="#fff4f4" height=46 />
+      </HStack>
+      <HStack height=54 spacing=8>
+        <Button text="Export Config" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=46 />
+        <Button text="Import Config" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=46 />
+      </HStack>
+    </VStack>
+  </HStack>
+</AppShell>

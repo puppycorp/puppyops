@@ -1,0 +1,73 @@
+<Import name="AppShell" from="partials/app_shell" />
+<Import name="PanelCard" from="partials/panel_card" />
+<Import name="StatusList" from="partials/status_list" />
+<Import name="LogList" from="partials/log_list" />
+<Import name="StatGrid" from="partials/stat_grid" />
+<Import name="SimpleTable" from="partials/simple_table" />
+<AppShell shell={state.shell}>
+  <HStack height=170 spacing=10>
+    <PanelCard title="SYSTEM HEALTH OVERVIEW" status="">
+      <HStack spacing=22>
+        <VStack width=220 spacing=4>
+          <Text value="HEALTH SCORE" color="#c2cedd" />
+          <Text value="94 /100" color="#57f18b" />
+          <Text value="EXCELLENT" color="#57f18b" />
+          <Text value="All systems operational" color="#9fb0c5" />
+        </VStack>
+        <StatGrid stats={state.health} width=210 height=110 />
+      </HStack>
+    </PanelCard>
+    <PanelCard title="CPU / GPU USAGE" status="">
+      <HStack><Text value="CPU" color="#aeb8c4" minWidth=42 /><Text value="28%" color="#f4f8ff" /><Slider min=0 max=100 value=28 step=1 /></HStack>
+      <HStack><Text value="GPU" color="#aeb8c4" minWidth=42 /><Text value="36%" color="#f4f8ff" /><Slider min=0 max=100 value=36 step=1 /></HStack>
+      <Text value="Good" color="#36d67a" />
+    </PanelCard>
+  </HStack>
+  <HStack grow=1 minHeight=0 spacing=10>
+    <VStack width=450 minHeight=0 spacing=10>
+      <PanelCard title="ROBOT DIAGRAM" status="">
+        <CustomComponent name="robot-diagram" entry={state.panel_entry} props={state.robot_props} height=360 />
+      </PanelCard>
+      <PanelCard title="FAULT HISTORY" status="">
+        <SimpleTable rows={state.faults} h1="Time" h2="Severity" h3="Component" h4="Status" />
+      </PanelCard>
+    </VStack>
+    <VStack grow=1 minWidth=520 minHeight=0 spacing=10>
+      <PanelCard title="JOINT TORQUE (Nm)" status="Live">
+        <CustomComponent name="joint-torque" entry={state.panel_entry} props={state.chart_props} height=170 />
+      </PanelCard>
+      <HStack height=220 spacing=10>
+        <PanelCard title="SENSOR STATUS" status="">
+          <StatusList items={state.sensors} />
+        </PanelCard>
+        <PanelCard title="CONNECTIVITY" status="">
+          <StatusList items={state.health} />
+        </PanelCard>
+      </HStack>
+      <HStack grow=1 spacing=10>
+        <PanelCard title="MAINTENANCE CHECKLIST" status="View All">
+          <StatusList items={state.sensors} />
+        </PanelCard>
+        <PanelCard title="FIRMWARE & SOFTWARE" status="">
+          <StatusList items={state.health} />
+        </PanelCard>
+      </HStack>
+    </VStack>
+    <VStack width=460 minHeight=0 spacing=10>
+      <PanelCard title="MOTOR TEMPERATURE (C)" status="View All">
+        <StatusList items={state.motors} />
+      </PanelCard>
+      <PanelCard title="EVENT LOG" status="All Levels">
+        <LogList logs={state.logs} />
+      </PanelCard>
+      <PanelCard title="SELF-TEST" status="Run Full Test">
+        <StatusList items={state.sensors} />
+      </PanelCard>
+    </VStack>
+  </HStack>
+  <HStack height=64 spacing=14>
+    <Button text="Download Logs" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=46 />
+    <Button text="Restart Robot" backgroundColor="#10243c" border="1px solid #1f75d6" color="#5da2ff" height=46 />
+    <Button text="EMERGENCY STOP" backgroundColor="#6b1f25" border="1px solid #ff6a5d" color="#fff4f4" height=46 />
+  </HStack>
+</AppShell>

@@ -1,0 +1,77 @@
+<Import name="AppShell" from="partials/app_shell" />
+<Import name="PanelCard" from="partials/panel_card" />
+<Import name="StatusList" from="partials/status_list" />
+<Import name="LogList" from="partials/log_list" />
+<Import name="StatGrid" from="partials/stat_grid" />
+<Import name="SimpleTable" from="partials/simple_table" />
+<AppShell shell={state.shell}>
+  <HStack height=44 spacing=10>
+    <VStack grow=1 spacing=2>
+      <HStack spacing=10>
+        <Text value="Pallet Pickup A -> B" color="#f4f8ff" />
+        <Text value="ACTIVE" color="#57f18b" />
+      </HStack>
+      <Text value="Mission ID: MP-2025-05-16-0013    Started: May 16, 10:32 AM    Robot: PuppyBot-01" color="#9fb0c5" />
+    </VStack>
+    <Button text="Pause" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=32 />
+    <Button text="Abort Mission" backgroundColor="#2a1117" border="1px solid #9c2b2b" color="#ff6a5d" height=32 />
+    <Button text="Edit Mission" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=32 />
+  </HStack>
+  <HStack grow=1 minHeight=0 spacing=10>
+    <VStack width=300 minHeight=0 spacing=10>
+      <PanelCard title="Mission Queue" status="">
+        <SimpleTable rows={state.queue} h1="Mission" h2="Robot" h3="Progress" h4="ETA" />
+      </PanelCard>
+      <PanelCard title="Live Robot Preview" status="LIVE">
+        <CustomComponent name="mission-preview" entry={state.panel_entry} props={state.preview_props} height=180 />
+      </PanelCard>
+      <PanelCard title="Quick Actions" status="">
+        <HStack spacing=8 wrap=true>
+          <Button text="Pause Mission" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=32 />
+          <Button text="Skip Step" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=32 />
+          <Button text="Stop Mission" backgroundColor="#2a1117" border="1px solid #9c2b2b" color="#ff6a5d" height=32 />
+          <Button text="Send to Dock" backgroundColor="#111c2b" border="1px solid #26364d" color="#dce7f3" height=32 />
+        </HStack>
+      </PanelCard>
+    </VStack>
+    <VStack grow=1 minWidth=560 minHeight=0 spacing=10>
+      <PanelCard title="Mission Planner" status="">
+        <CustomComponent name="mission-map" entry={state.panel_entry} props={state.mission_map_props} height=420 />
+      </PanelCard>
+      <HStack height=280 spacing=10>
+        <PanelCard title="Mission Activity Log" status="">
+          <LogList logs={state.logs} />
+        </PanelCard>
+        <PanelCard title="Schedule" status="May 16, 2025">
+          <SimpleTable rows={state.schedule} h1="Time" h2="Mission" h3="Robot" h4="Status" />
+        </PanelCard>
+        <PanelCard title="Mission Summary" status="Last 7 Days">
+          <StatGrid stats={state.stats} width=145 height=76 />
+          <CustomComponent name="mission-summary-chart" entry={state.panel_entry} props={state.mission_map_props} height=110 />
+        </PanelCard>
+      </HStack>
+    </VStack>
+    <VStack width=470 minHeight=0 spacing=10>
+      <PanelCard title="Mission Details" status="ACTIVE">
+        <HStack spacing=12>
+          <VStack grow=1 spacing=7>
+            <Text value="Pick up pallet from location A1-12 and place at shipping staging location B2-04. Inspect and dock." color="#dce7f3" breakWords=true />
+            <HStack><Text value="Priority" color="#aeb8c4" grow=1 /><Text value="High" color="#ff6a5d" /></HStack>
+            <HStack><Text value="Progress" color="#aeb8c4" grow=1 /><Text value="52%" color="#dce7f3" /></HStack>
+            <Slider min=0 max=100 value=52 step=1 />
+            <HStack><Text value="Current Step" color="#aeb8c4" grow=1 /><Text value="Inspect" color="#b76cff" /></HStack>
+          </VStack>
+          <CustomComponent name="mission-robot" entry={state.panel_entry} props={state.robot_props} width=150 height=210 />
+        </HStack>
+      </PanelCard>
+      <HStack grow=1 minHeight=0 spacing=10>
+        <PanelCard title="Safety Checks" status="All Clear">
+          <StatusList items={state.checks} />
+        </PanelCard>
+        <PanelCard title="Task Palette" status="">
+          <StatusList items={state.palette} />
+        </PanelCard>
+      </HStack>
+    </VStack>
+  </HStack>
+</AppShell>

@@ -1,0 +1,11 @@
+<Import name="TopBar" from="top_bar" />
+<Import name="SideNav" from="side_nav" />
+<VStack fill=true spacing=0 backgroundColor="#050a10" overflow="hidden">
+  <TopBar shell={shell} />
+  <HStack grow=1 minHeight=0 spacing=0 backgroundColor="#07101a">
+    <SideNav items={shell.nav_items} />
+    <VStack grow=1 minWidth=0 minHeight=0 spacing=10 padding=12 overflow="auto">
+      <Children />
+    </VStack>
+  </HStack>
+</VStack>
